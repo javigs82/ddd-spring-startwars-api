@@ -1,0 +1,11 @@
+logging:
+  level:
+    root: ERROR
+    org.springframework: INFO
+    org.springframework.data: ERROR
+    me.javigs82.startwars.infrastructure: DEBUG
+  pattern:
+    console: "%d{yyyy-MM-dd HH:mm:ss} %-5p %c{1} - %m%n"
+    file: "%d{yyyy-MM-dd HH:mm:ss} [%thread] %-5level %logger{36} - %msg%n"
+
+  file: /var/log/startwars/application.log
