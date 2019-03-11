@@ -1,8 +1,7 @@
-# Domain Driven Design - Start Wars Api 
-This project aims to develop endpoints about start wars entities provided by [swapi](https://swapi.co/) while applying 
-principles of Domain Driven Design.
+# Domain Driven Design - Start Wars API
+This project aims to develop restful endpoints about start wars entities provided by [swapi](https://swapi.co/) while applying principles of Domain Driven Design.
 
-This project is written in java8 under spring-boot web framework.
+This project is written in java8 under spring-boot web framework using futures to complete task in a asynchronous way.
 
 ## Requirements
 
