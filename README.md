@@ -1,7 +1,7 @@
 # Domain Driven Design - Start Wars API
 This project aims to develop restful endpoints about start wars entities provided by [swapi](https://swapi.co/) while applying principles of Domain Driven Design.
 
-This project is written in java8 under spring-boot web framework using futures to complete task in a asynchronous way.
+This project is written in java8 under spring-boot web framework using futures to complete tasks in a asynchronous way.
 
 ## Requirements
 
@@ -104,7 +104,7 @@ gradle clean build
 Explain how to run the automated tests for this system
 
 ```
-gradle  test
+gradle test
 ```
 
 ## Deployment
@@ -127,8 +127,8 @@ with an expected output like:
 ...
 ...
 ...
-2019-03-09 16:26:54.996  INFO 27752 --- [           main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 8080 (http) with context path ''
-2019-03-09 16:26:55.003  INFO 27752 --- [           main] m.j.startwars.SpringApplicationBuilder   : Started SpringApplicationBuilder i
+2019-03-10 16:26:54.996  INFO 27752 --- [           main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 8080 (http) with context path ''
+2019-03-10 16:26:55.003  INFO 27752 --- [           main] m.j.startwars.SpringApplicationBuilder   : Started SpringApplicationBuilder i
 
 ```
 
