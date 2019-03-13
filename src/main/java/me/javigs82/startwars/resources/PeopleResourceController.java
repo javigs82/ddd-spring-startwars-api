@@ -1,6 +1,6 @@
 package me.javigs82.startwars.resources;
 
-import me.javigs82.startwars.domain.People;
+import me.javigs82.startwars.domain.model.People;
 import me.javigs82.startwars.domain.PeopleService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -28,14 +28,13 @@ public class PeopleResourceController {
     private PeopleService peopleService;
 
     /**
-     * Restful class controller for people endpoint
+     * Restful class controller for /people endpoint
      *
      * @author javigs82
      */
-
-
     @RequestMapping(value = "/people", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<List<People>> getAllPeopleSorted(@RequestParam(name = "sort") String sort) throws ExecutionException, InterruptedException {
+    public ResponseEntity<List<People>> getAllPeopleSorted(@RequestParam(name = "sort") String sort)
+            throws ExecutionException, InterruptedException {
         log.info("getting all people sorted by {}", sort);
         //map sort.
         SortValues sortValue = SortValues.get(sort);
@@ -47,15 +46,20 @@ public class PeopleResourceController {
 
         switch (sortValue) {
             case NAME_ASC:
-                return new ResponseEntity<>(peopleService.getPeopleSortedByNameASC().orElse(Collections.EMPTY_LIST), HttpStatus.OK);
+                return new ResponseEntity<>(peopleService.getPeopleSortedByNameASC().orElse(Collections.EMPTY_LIST),
+                        HttpStatus.OK);
             case NAME_DESC:
-                return new ResponseEntity<>(peopleService.getPeopleSortedByNameDESC().orElse(Collections.EMPTY_LIST), HttpStatus.OK);
+                return new ResponseEntity<>(peopleService.getPeopleSortedByNameDESC().orElse(Collections.EMPTY_LIST),
+                        HttpStatus.OK);
             case CREATED_DATE_ASC:
-                return new ResponseEntity<>(peopleService.getPeopleSortedByCreatedASC().orElse(Collections.EMPTY_LIST), HttpStatus.OK);
+                return new ResponseEntity<>(peopleService.getPeopleSortedByCreatedASC().orElse(Collections.EMPTY_LIST),
+                        HttpStatus.OK);
             case CREATED_DATE_DESC:
-                return new ResponseEntity<>(peopleService.getPeopleSortedByCreatedDESC().orElse(Collections.EMPTY_LIST), HttpStatus.OK);
+                return new ResponseEntity<>(peopleService.getPeopleSortedByCreatedDESC().orElse(Collections.EMPTY_LIST),
+                        HttpStatus.OK);
             default: //default name asc
-                return new ResponseEntity<>(peopleService.getPeopleSortedByNameDESC().orElse(Collections.EMPTY_LIST), HttpStatus.OK);
+                return new ResponseEntity<>(peopleService.getPeopleSortedByNameDESC().orElse(Collections.EMPTY_LIST),
+                        HttpStatus.OK);
         }
 
     }
