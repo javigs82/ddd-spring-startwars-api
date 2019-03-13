@@ -30,6 +30,15 @@ This project is written in java8 under spring-boot web framework using futures t
  - The mechanism for sorting should be designed following the "Open-closed" principle.
  - Visualize the data using `json` format.
 
+#### Definition of Done
+
+After run the server, please click on the following to links to check if result is what expected 
+
+ - Sort by name asc: http://localhost:8080/people?sort=%2Bname
+ - Sort by name desc: http://localhost:8080/people?sort=-name
+ - Sort by created asc: http://localhost:8080/people?sort=-created
+ - Sort by created desc: http://localhost:8080/people?sort=%2Bcreated
+
 ## Domain Driven Design
 
 This web service is designed under DDD paradigm. Domain-driven design is not a technology or a methodology. 
@@ -68,6 +77,20 @@ In accordance with Persistence and Infrastructure Ignorance principles, the infr
 the domain model layer. You must keep the domain model entity classes agnostic from the infrastructure that you use to 
 persist data (EF or any other framework) by not taking hard dependencies on frameworks.
 
+### Nouns
+
+nouns found while domain analisys are:
+ - People
+ -Startship
+
+which they reflect the model of the services
+
+### Verbs
+This section is in charge of the definition of the funcionalities represented as endpoints
+
+ - /people: endpoint to get all people. It defines one mandatory param `sort` that can take the following values: 
+ {`+name`,`-name`,`+created`,`-created`}
+    
  
 ## Getting Started
 
@@ -140,4 +163,4 @@ with an expected output like:
 
 ## License
 
-This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md) file for details
+This project is licensed under the MIT License - see the [LICENSE.md](LICENSE) file for details
