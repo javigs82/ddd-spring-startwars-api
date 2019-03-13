@@ -54,7 +54,6 @@ They exist to help developers manage the complexity in the code.
 You want to design the system so that each layer communicates only with certain other layers.
 
 Please take a look into following image to have a global vision of how the framework addresses layer design
-
 ![DDD layered arch](http://www.joaopauloseixas.com/howtodoit.net/wp-content/uploads/2011/04/Domain-Driven-Design-Overview-of-a-Layered-Architecture.png)
 
 #### Domain Model Layer
@@ -81,12 +80,12 @@ persist data (EF or any other framework) by not taking hard dependencies on fram
 
 nouns found while domain analisys are:
  - People
- -Startship
+ - Startship
 
 which they reflect the model of the services
 
 ### Verbs
-This section is in charge of the definition of the funcionalities represented as endpoints
+This section is in charge of the definition of the functionalities represented as endpoints
 
  - /people: endpoint to get all people. It defines one mandatory param `sort` that can take the following values: 
  {`+name`,`-name`,`+created`,`-created`}
