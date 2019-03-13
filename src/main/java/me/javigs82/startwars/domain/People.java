@@ -1,5 +1,7 @@
 package me.javigs82.startwars.domain;
 
+import java.util.Arrays;
+
 public class People {
 
     private String name;
@@ -165,7 +167,7 @@ public class People {
 
     @Override
     public String toString() {
-        return "ClassPojo [films = " + films + ", homeworld = " + homeworld + ", gender = " + gender + ", skin_color = " + skin_color + ", edited = " + edited + ", created = " + created + ", mass = " + mass + ", vehicles = " + vehicles + ", url = " + url + ", hair_color = " + hair_color + ", birth_year = " + birth_year + ", eye_color = " + eye_color + ", species = " + species + ", starships = " + starships + ", name = " + name + ", height = " + height + "]";
+        return "ClassPojo [films = " + Arrays.toString(films) + ", homeworld = " + homeworld + ", gender = " + gender + ", skin_color = " + skin_color + ", edited = " + edited + ", created = " + created + ", mass = " + mass + ", vehicles = " + Arrays.toString(vehicles) + ", url = " + url + ", hair_color = " + hair_color + ", birth_year = " + birth_year + ", eye_color = " + eye_color + ", species = " + Arrays.toString(species) + ", starships = " + Arrays.toString(starships) + ", name = " + name + ", height = " + height + "]";
     }
 }
 
