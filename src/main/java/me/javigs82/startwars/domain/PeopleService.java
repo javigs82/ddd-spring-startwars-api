@@ -1,34 +1,19 @@
 package me.javigs82.startwars.domain;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
-import org.springframework.boot.autoconfigure.AutoConfigureOrder;
-import org.springframework.scheduling.annotation.Async;
-import org.springframework.stereotype.Service;
-
 import java.util.List;
+import java.util.Optional;
 import java.util.concurrent.ExecutionException;
 
+public interface PeopleService {
+    Optional<List<People>> getPeopleSortedByNameASC() throws ExecutionException, InterruptedException;
 
-@Service
-public class PeopleService {
+    Optional<List<People>> getPeopleSortedByNameDESC() throws ExecutionException, InterruptedException;
 
-    private static Logger log = LoggerFactory.getLogger(PeopleService.class);
+    Optional<List<People>> getPeopleSortedByCreatedASC() throws ExecutionException, InterruptedException;
 
-    @Autowired
-    @Qualifier ("peopleAdapter")
-    private PeoplePort peoplePort;
+    Optional<List<People>> getPeopleSortedByCreatedDESC() throws ExecutionException, InterruptedException;
 
-
-    //TODO: implement sorting here
-    //In a wel done this method should
-    //catch exception and thrown the proper one
-    public List<People> getPeopleSortedBy () throws InterruptedException, ExecutionException {
-        return peoplePort.getAll();
+    enum SortDirection {
+        ASC, DESC
     }
-
-
-
 }
