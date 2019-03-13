@@ -1,10 +1,8 @@
-package me.javigs82.startwars.domain;
+package me.javigs82.startwars.domain.model;
 
 import com.fasterxml.jackson.annotation.JsonGetter;
-import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonSetter;
 
-import java.util.Arrays;
 import java.util.List;
 
 public class People {
