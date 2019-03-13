@@ -1,14 +1,17 @@
 package me.javigs82.startwars.domain;
 
+import com.fasterxml.jackson.annotation.JsonGetter;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonSetter;
+
 import java.util.Arrays;
+import java.util.List;
 
 public class People {
 
     private String name;
 
     private String height;
-
-    private String homeworld;
 
     private String gender;
 
@@ -28,29 +31,25 @@ public class People {
 
     private String eye_color;
 
-    private String[] films;
+    private String[] starshipsUrl;
 
-    private String[] vehicles;
-
-    private String[] species;
-
-    private String[] starships;
+    private List<StartShip> starships;
 
 
-    public String[] getFilms() {
-        return films;
+    public String getName() {
+        return name;
     }
 
-    public void setFilms(String[] films) {
-        this.films = films;
+    public void setName(String name) {
+        this.name = name;
     }
 
-    public String getHomeworld() {
-        return homeworld;
+    public String getHeight() {
+        return height;
     }
 
-    public void setHomeworld(String homeworld) {
-        this.homeworld = homeworld;
+    public void setHeight(String height) {
+        this.height = height;
     }
 
     public String getGender() {
@@ -93,14 +92,6 @@ public class People {
         this.mass = mass;
     }
 
-    public String[] getVehicles() {
-        return vehicles;
-    }
-
-    public void setVehicles(String[] vehicles) {
-        this.vehicles = vehicles;
-    }
-
     public String getUrl() {
         return url;
     }
@@ -133,41 +124,22 @@ public class People {
         this.eye_color = eye_color;
     }
 
-    public String[] getSpecies() {
-        return species;
+    public String[] getStarshipsUrl() {
+        return starshipsUrl;
     }
 
-    public void setSpecies(String[] species) {
-        this.species = species;
+    @JsonSetter("starships") //to map from swapi
+    public void setStarshipsUrl(String[] starships) {
+        this.starshipsUrl = starships;
     }
 
-    public String[] getStarships() {
+    @JsonGetter("starships") //to map when it is rendered as json
+    public  List<StartShip> getStarships() {
         return starships;
     }
 
-    public void setStarships(String[] starships) {
+    public void setStarships( List<StartShip> starships) {
         this.starships = starships;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public String getHeight() {
-        return height;
-    }
-
-    public void setHeight(String height) {
-        this.height = height;
-    }
-
-    @Override
-    public String toString() {
-        return "ClassPojo [films = " + Arrays.toString(films) + ", homeworld = " + homeworld + ", gender = " + gender + ", skin_color = " + skin_color + ", edited = " + edited + ", created = " + created + ", mass = " + mass + ", vehicles = " + Arrays.toString(vehicles) + ", url = " + url + ", hair_color = " + hair_color + ", birth_year = " + birth_year + ", eye_color = " + eye_color + ", species = " + Arrays.toString(species) + ", starships = " + Arrays.toString(starships) + ", name = " + name + ", height = " + height + "]";
     }
 }
 
