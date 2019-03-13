@@ -21,7 +21,7 @@ import java.util.stream.Collectors;
 @Component("peopleAdapter")
 public class PeopleAdapter implements PeoplePort {
 
-    private static Logger log = LoggerFactory.getLogger(PeopleAdapter.class);
+    private static final Logger log = LoggerFactory.getLogger(PeopleAdapter.class);
 
     @Autowired
     private RestTemplate restTemplate;
@@ -29,11 +29,12 @@ public class PeopleAdapter implements PeoplePort {
 
     @Override
     public List<People> getAll() throws InterruptedException, ExecutionException {
-        List<People> result = new ArrayList<>();
-        //Init result to calculate numberOfThreads to make requests in a async way
-        PeopleResult initResult = this.getPeopleByPage(1).get();
-        result.addAll(initResult.results);
-        final int resultCount = initResult.count;
+        //First Result to calculate numberOfThreads to make requests in a async way
+        PeopleResult firstResult = this.getPeopleByPage(1).get();
+
+        List<People> result = new ArrayList<>(firstResult.results);
+
+        final int resultCount = firstResult.count;
         final int numberOfRegPerRequest = 10;
         final int numberOfThreads = (resultCount / numberOfRegPerRequest) + 1;
 
@@ -45,29 +46,23 @@ public class PeopleAdapter implements PeoplePort {
 
 
         List<CompletableFuture<PeopleResult>> peopleResultFutures = pageNumbers.stream()
-                .map(page -> getPeopleByPage(page))
+                .map(this::getPeopleByPage)
                 .collect(Collectors.toList());
 
 
         // Create a combined Future using allOf()
         CompletableFuture<Void> allFutures = CompletableFuture.allOf(
-                peopleResultFutures.toArray(new CompletableFuture[peopleResultFutures.size()])
+                peopleResultFutures.toArray(new CompletableFuture[0])
         );
 
         // When all the Futures are completed, call `future.join()` to get their results and collect the results in a list -
-        CompletableFuture<List<PeopleResult>> allPeopleResultFuture = allFutures.thenApply(v -> {
-            return peopleResultFutures.stream()
-                    .map(peopleResultFuture -> peopleResultFuture.join())
-                    .collect(Collectors.toList());
-        });
+        CompletableFuture<List<PeopleResult>> allPeopleResultFuture = allFutures.thenApply(v -> peopleResultFutures.stream()
+                .map(CompletableFuture::join)
+                .collect(Collectors.toList()));
 
-        CompletableFuture<List<People>> people = allPeopleResultFuture.thenApply(peopleResults -> {
-             return peopleResults.stream()
-                    //.filter (peopleResult -> !peopleResult.results.isEmpty())
-                     //.count();
-            .flatMap (peopleResult -> peopleResult.getResults().stream())
-                     .collect(Collectors.toList());
-        });
+        CompletableFuture<List<People>> people = allPeopleResultFuture.thenApply(peopleResults -> peopleResults.stream()
+                .flatMap(peopleResult -> peopleResult.getResults().stream())
+                .collect(Collectors.toList()));
 
         result.addAll(people.get());
 

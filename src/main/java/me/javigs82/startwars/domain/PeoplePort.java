@@ -5,8 +5,7 @@ import java.util.concurrent.ExecutionException;
 
 public interface PeoplePort {
 
+    List<People> getAll() throws InterruptedException, ExecutionException;
 
-	List<People> getAll() throws InterruptedException, ExecutionException;
 
- 
 }
