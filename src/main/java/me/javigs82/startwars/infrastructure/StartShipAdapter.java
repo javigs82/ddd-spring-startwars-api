@@ -12,12 +12,17 @@ import org.springframework.stereotype.Component;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.util.UriComponentsBuilder;
 
+import java.util.HashMap;
+import java.util.Map;
 import java.util.concurrent.CompletableFuture;
 
 @Component("startShipAdapter")
 public class StartShipAdapter implements StartShipPort {
 
     private static final Logger log = LoggerFactory.getLogger(StartShipAdapter.class);
+
+    //tmp map to avoid request the same startship multiples times
+    private static Map<String, StartShip> cacheMap = new HashMap<>();
 
     @Autowired
     private RestTemplate restTemplate;
@@ -27,6 +32,12 @@ public class StartShipAdapter implements StartShipPort {
     public CompletableFuture<StartShip> getStartShipByUrl(String url) {
         return CompletableFuture.supplyAsync(() -> {
             log.debug("getStartShipByUrl {}", url);
+
+            //check in cache to avoid request
+            if (cacheMap.containsKey(url)) {
+                log.debug("getStartShipByUrl cached");
+                return cacheMap.get(url);
+            }
 
             //Set the headers you need send, like User-Agent to avoid 403
             final HttpHeaders headers = new HttpHeaders();
@@ -47,7 +58,11 @@ public class StartShipAdapter implements StartShipPort {
             log.trace("peopleResult, {}", response.getBody());
             log.debug("getStartShipByUrl completed");
 
-            return response.getBody();
+            StartShip result = response.getBody();
+            //add to cache
+            cacheMap.put(url, result);
+
+            return result;
         });
     }
 }
