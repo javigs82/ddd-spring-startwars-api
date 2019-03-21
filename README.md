@@ -5,7 +5,7 @@ while applying principles of Domain Driven Design.
 This project is written in java8 under spring-boot web framework using futures to complete tasks in a asynchronous way.
 
 In this project you'll see the following in action:
- - Domain Driven Design: Domains, Ports and Adapters
+ - Domain Driven Design: Onion Architecture with Ports and Adapters
  - API Rest
  - Spring Boot
  - Java 8 : Functional Interfaces, Lambda & Optional
