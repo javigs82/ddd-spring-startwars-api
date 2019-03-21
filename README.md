@@ -166,8 +166,12 @@ with an expected output like:
 ## References and Sources
 
 - [Design a DDD-oriented microservices](https://docs.microsoft.com/en-us/dotnet/standard/microservices-architecture/microservice-ddd-cqrs-patterns/ddd-oriented-microservice)
-- [Hexagonal Architecture](http://alistair.cockburn.us/Hexagonal+architecture)
+- [Onion Architecture](https://jeffreypalermo.com/2008/07/the-onion-architecture-part-1/)
 - [DDD](https://pehapkari.cz/blog/2018/03/28/domain-driven-design-services-factories/)
+
+## Author
+
+* javigs82 [github](https://github.com/javigs82/)
 
 ## License
 
